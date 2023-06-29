@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">ParkIN</string>
+    <string name="menu_button">Menu Button</string>
+    <string name="fab_description">Click the button for parking</string>
+    <string name="google_maps_key">AIzaSyAf1DuQjNy2Lylu3f2yxD6l7Cd-SGzzvBE</string>
+    <string name="open_drawer">Open Drawer</string>
+    <string name="close_drawer">Close Drawer</string>
+    <string name="distance">Distance:</string>
+
+    <string-array name="titles">
+        <item>Title 1</item>
+        <item>Title 2</item>
+        <item>Title 3</item>
+        <item>Title 4</item>
+    </string-array>
+
+</resources>

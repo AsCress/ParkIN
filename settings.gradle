@@ -1,0 +1,2 @@
+rootProject.name='ParkIN'
+include ':app'
