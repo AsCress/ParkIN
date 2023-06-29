@@ -41,8 +41,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:clickable="true"
                         android:backgroundTint="@android:color/black"
+                        android:clickable="true"
                         app:backgroundTint="@android:color/white"
                         app:borderWidth="1dp"
                         app:srcCompat="@drawable/baseline_local_parking_white_24dp" />
@@ -127,11 +127,15 @@
             android:clickable="true"
             android:contentDescription="@string/fab_description"
             android:focusable="true"
+            android:scaleType="center"
             android:tint="@color/design_default_color_on_primary"
-            app:backgroundTint="@android:color/black"
+            app:backgroundTint="@color/colorAccent"
+            app:backgroundTintMode="screen"
             app:elevation="10dp"
+            app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:maxImageSize="24dp"
             app:srcCompat="@drawable/baseline_local_parking_white_24dp" />
 
         <TextView
