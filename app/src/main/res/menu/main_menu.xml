@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group
+    android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_home"
+        android:title="HOME"
+        android:icon="@drawable/ic_baseline_dashboard_24"/>
+
+    <item
+        android:id="@+id/nav_search"
+        android:title="SEARCH"
+        android:icon="@drawable/ic_baseline_search_24"/>
+
+    <item
+        android:id="@+id/nav_all_categories"
+        android:title="ALL CATEGORIES"
+        android:icon="@drawable/ic_baseline_category_24"/>
+
+    <item
+        android:id="@+id/nav_add_missing_place"
+        android:title="ADD MISSING PLACE"
+        android:icon="@drawable/ic_baseline_add_location_alt_24"/>
+</group>
+
+    <item
+        android:title="Profile">
+        <menu>
+            <group
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_login"
+                    android:title="LOGIN"
+                    android:icon="@drawable/ic_baseline_login_24"/>
+
+                <item
+                    android:id="@+id/nav_profile"
+                    android:title="PROFILE"
+                    android:icon="@drawable/ic_baseline_menu_open_24"/>
+
+                <item
+                    android:id="@+id/nav_logout"
+                    android:title="LOGOUT"
+                    android:icon="@drawable/ic_baseline_logout_24"/>
+            </group>
+        </menu>
+    </item>
+</menu>

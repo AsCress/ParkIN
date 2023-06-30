@@ -9,96 +9,16 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/drawer"
-        android:layout_width="270dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="#ffffff"
         android:choiceMode="singleChoice"
         android:divider="@color/colorAccent"
         android:dividerHeight="0dp"
-        android:fitsSystemWindows="true">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="6dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/black"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/floatingActionButton2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:backgroundTint="@android:color/black"
-                        android:clickable="true"
-                        app:backgroundTint="@android:color/white"
-                        app:borderWidth="1dp"
-                        app:srcCompat="@drawable/baseline_local_parking_white_24dp" />
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/capriola"
-                        android:text="ParkIN"
-                        android:textAlignment="viewStart"
-                        android:textColor="@android:color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:fontFamily="@font/capriola"
-                        android:text="park.in@gmail.com"
-                        android:textColor="@android:color/white"
-                        android:textSize="18sp" />
-
-                    <View
-                        android:id="@+id/divider"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@android:color/darker_gray" />
-
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="16dp"
-                        android:fontFamily="@font/capriola"
-                        android:text="Learn More"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <ListView
-                android:id="@+id/drawerList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@null" />
-        </LinearLayout>
-
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/menu_header"
+        app:menu="@menu/main_menu">
     </com.google.android.material.navigation.NavigationView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -136,7 +56,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:maxImageSize="24dp"
-            app:srcCompat="@drawable/baseline_local_parking_white_24dp" />
+            app:srcCompat="@drawable/ic_baseline_local_parking_24" />
 
         <TextView
             android:id="@+id/textView3"
@@ -174,7 +94,8 @@
             app:fabSize="mini"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:srcCompat="@drawable/baseline_my_location_black_24dp" />
+            app:maxImageSize="36dp"
+            app:srcCompat="@drawable/ic_baseline_my_location_24" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/addressCard"

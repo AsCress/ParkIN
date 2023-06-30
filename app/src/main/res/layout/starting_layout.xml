@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.379"
-        app:srcCompat="@drawable/baseline_local_parking_white_24dp" />
+        app:srcCompat="@drawable/ic_baseline_local_parking_24" />
 
     <TextView
         android:id="@+id/textView5"

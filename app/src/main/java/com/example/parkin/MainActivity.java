@@ -47,6 +47,7 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.provider.ContactsContract;
 import android.provider.Settings;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -86,6 +87,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -109,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ListView drawerList;
 
     private DrawerLayout drawerLayout;
+
+    private NavigationView navigationView;
 
     private ActionBarDrawerToggle drawerToggle;
 
@@ -139,9 +143,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Fade fade = new Fade();
+        View decor = getWindow().getDecorView();
+
+        getWindow().setEnterTransition(fade);
+
+        getWindow().setExitTransition(fade);
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -230,15 +241,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         String[] titles = getResources().getStringArray(R.array.titles);
 
-        drawerList = (ListView)findViewById(R.id.drawerList);
-
-        ArrayAdapter<String> adapter =  new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titles);
-
-        drawerList.setAdapter(adapter);
-
         drawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
 
-        drawerList.setOnItemClickListener(new DrawerItemClickListener());
+        navigationView = (NavigationView)findViewById(R.id.drawer);
+
 
         drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer)
         {
