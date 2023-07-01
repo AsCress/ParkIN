@@ -286,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 MapStyleOptions.loadRawResourceStyle(
                         this, R.raw.style_json));
         mMap.setMyLocationEnabled(true);
-        mMap.setPadding(0,0,0,180);
+        // mMap.setPadding(0,0,0,180);
         UiSettings settings = mMap.getUiSettings();
         settings.setCompassEnabled(false);
         settings.setRotateGesturesEnabled(false);

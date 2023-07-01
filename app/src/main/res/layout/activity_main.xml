@@ -18,8 +18,7 @@
         android:dividerHeight="0dp"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/menu_header"
-        app:menu="@menu/main_menu">
-    </com.google.android.material.navigation.NavigationView>
+        app:menu="@menu/main_menu"></com.google.android.material.navigation.NavigationView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -65,8 +64,9 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/capriola"
             android:text="ParkIN"
-            android:textSize="30sp"
-            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/addressCard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -86,56 +86,56 @@
             android:id="@+id/myLocationButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
             android:clickable="true"
-            app:backgroundTint="@android:color/white"
+            app:backgroundTint="#FFFFFF"
             app:elevation="8dp"
             app:fabSize="mini"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:maxImageSize="36dp"
+            app:layout_constraintTop_toBottomOf="@+id/addressCard"
+            app:maxImageSize="24dp"
             app:srcCompat="@drawable/ic_baseline_my_location_24" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/addressCard"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_height="45dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:fontFamily="@font/capriola"
-                    android:text="Your Location:"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    app:srcCompat="@drawable/ic_baseline_arrow_right_24" />
 
                 <TextView
                     android:id="@+id/addressField"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:fontFamily="@font/capriola"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp"
-                    android:ellipsize="end"/>
-            </LinearLayout>
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="-1dp"
+                    android:layout_toEndOf="@+id/imageView2"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center|start"
+                    android:maxLines="1"
+                    android:text="Seach.."
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
