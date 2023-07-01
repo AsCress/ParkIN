@@ -5,7 +5,8 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false">
+    android:fitsSystemWindows="false"
+    android:visibility="visible">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/drawer"
@@ -25,17 +26,36 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"></fragment>
+            app:layout_constraintTop_toTopOf="parent">
+
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></fragment>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_centerInParent="true" />
+
+            <ImageView
+                android:id="@+id/marker"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:layout_above="@+id/view"
+                android:layout_centerHorizontal="true"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/marker" />
+
+        </RelativeLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
@@ -89,6 +109,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
             android:clickable="true"
+            android:visibility="visible"
             app:backgroundTint="#FFFFFF"
             app:elevation="8dp"
             app:fabSize="mini"
@@ -132,9 +153,20 @@
                     android:fontFamily="sans-serif"
                     android:gravity="center|start"
                     android:maxLines="1"
-                    android:text="Seach.."
+                    android:text="Getting Your Location..."
                     android:textColor="#000000"
                     android:textSize="14sp" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="-7dp"
+                    android:indeterminate="true"
+                    android:indeterminateTint="#52A724"
+                    android:progressTint="#52A724" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 

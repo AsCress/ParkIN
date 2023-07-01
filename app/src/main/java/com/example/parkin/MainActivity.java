@@ -29,6 +29,8 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
@@ -55,6 +57,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,6 +82,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -140,6 +144,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     String urlStr;
 
+    FloatingActionButton FAB;
+
+    FloatingActionButton FAB1;
+
+    ProgressBar progressBar;
+
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,7 +203,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         buildClient();
 
-        FloatingActionButton FAB1 = (FloatingActionButton)findViewById(R.id.myLocationButton);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        FAB1 = (FloatingActionButton)findViewById(R.id.myLocationButton);
 
         FAB1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,11 +212,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 getLastLocation();
 
                 if (currentLoc != null) {
+                    mMap.clear();
                     position = new LatLng(currentLoc.getLatitude(), currentLoc.getLongitude());
 
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
-
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 15.0f), 500, null);
 
                     new GetAddress().execute();
                 }
@@ -217,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton FAB = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        FAB = (FloatingActionButton) findViewById(R.id.floatingActionButton);
 
         FAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,7 +255,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         navigationView = (NavigationView)findViewById(R.id.drawer);
 
-
         drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer)
         {
             public void onDrawerClosed(View view)
@@ -266,13 +275,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        progressDialog = new ProgressDialog(MainActivity.this);
-
-        progressDialog.setMessage("Getting Your Location...");
-
-        progressDialog.setCancelable(false);
-
-        progressDialog.show();
 
     }
 
@@ -280,17 +282,28 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         mMap = googleMap;
         mMap.setMapStyle(
                 MapStyleOptions.loadRawResourceStyle(
                         this, R.raw.style_json));
         mMap.setMyLocationEnabled(true);
         // mMap.setPadding(0,0,0,180);
+
         UiSettings settings = mMap.getUiSettings();
         settings.setCompassEnabled(false);
         settings.setRotateGesturesEnabled(false);
         settings.setMyLocationButtonEnabled(false);
+
+        mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+            @Override
+            public void onCameraChange(CameraPosition cameraPosition) {
+                if (currentLoc != null) {
+                    currentLoc.setLatitude(cameraPosition.target.latitude);
+                    currentLoc.setLongitude(cameraPosition.target.longitude);
+                    new GetAddress().execute();
+                }
+            }
+        });
 
     }
 
@@ -415,19 +428,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onLocationChanged(Location location) {
         currentLoc = location;
+        ImageView marker = (ImageView)findViewById(R.id.marker);
 
         if (currentLoc != null) {
             if (reference == 0) {
                 position = new LatLng(currentLoc.getLatitude(), currentLoc.getLongitude());
 
-                progressDialog.cancel();
+                progressBar.setVisibility(View.INVISIBLE);
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
-
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 15.0f), 500, null);
 
                 new GetAddress().execute();
 
+                marker.setVisibility(View.VISIBLE);
             }
             reference++;
         }
@@ -446,7 +459,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         {
             super.onPreExecute();
 
-            addressField.setText("Getting your address...");
+            progressBar.setVisibility(View.VISIBLE);
+
+            FAB1.setVisibility(View.INVISIBLE);
+
+            addressField.setText("Loading...");
 
         }
 
@@ -496,6 +513,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 resultAddress = mAddress;
                 addressField.setText(mAddress);
+                progressBar.setVisibility(View.INVISIBLE);
+                FAB1.setVisibility(View.VISIBLE);
 
             } else {
                 new GetLocationFromGeocoder().execute();
@@ -540,8 +559,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             else
             {
-                addressField.setText("Couldn't load your address");
+                addressField.setText("Your Location");
             }
+            progressBar.setVisibility(View.INVISIBLE);
+            FAB1.setVisibility(View.VISIBLE);
         }
     }
 
