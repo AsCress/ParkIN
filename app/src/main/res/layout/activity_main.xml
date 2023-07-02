@@ -53,7 +53,7 @@
                 android:layout_above="@+id/view"
                 android:layout_centerHorizontal="true"
                 android:visibility="invisible"
-                app:srcCompat="@drawable/marker" />
+                app:srcCompat="@drawable/marker1" />
 
         </RelativeLayout>
 
