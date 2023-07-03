@@ -15,6 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".SearchActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".RoutingActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Starting">
@@ -35,8 +42,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity android:name=".ParkingActivity" />
     </application>
 

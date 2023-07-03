@@ -7,9 +7,12 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.splashscreen.SplashScreen;
+import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -150,6 +153,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     ProgressBar progressBar;
 
+    CardView cardView;
+
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,6 +210,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
         FAB1 = (FloatingActionButton)findViewById(R.id.myLocationButton);
+        cardView = (CardView)findViewById(R.id.addressCard);
 
         FAB1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -275,6 +281,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, cardView, ViewCompat.getTransitionName(cardView));
+
+                startActivity(intent);
+            }
+        });
 
     }
 
